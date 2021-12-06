@@ -1,0 +1,65 @@
+{
+  "name": "@therufa/cal",
+  "version": "0.1.0",
+  "description": "Days of a month for any year in a 2D array",
+  "main": "dist/src",
+  "engines": {
+    "node": ">=12"
+  },
+  "scripts": {
+    "test": "xo && npm run build && nyc ava",
+    "build": "del-cli dist && tsc",
+    "prepack": "npm run build"
+  },
+  "files": [
+    "dist/src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/therufa/calendar.git"
+  },
+  "keywords": [
+    "calendar",
+    "gregorian",
+    "julian",
+    "month",
+    "year",
+    "day",
+    "timetable",
+    "table",
+    "chronology",
+    "almanac",
+    "menology"
+  ],
+  "author": "@therufa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/therufa/calendar/issues"
+  },
+  "homepage": "https://github.com/therufa/calendar#readme",
+  "devDependencies": {
+    "@types/jest": "^27.0.3",
+    "@types/node": "^16.11.11",
+    "clear-module": "^4.1.2",
+    "del-cli": "^4.0.1",
+    "jest": "^27.4.3",
+    "nyc": "^15.1.0",
+    "ts-jest": "^27.1.0",
+    "typescript": "^4.5.2",
+    "xo": "^0.47.0"
+  },
+  "types": "dist/src",
+  "xo": {
+    "rules": {
+      "@typescript-eslint/no-implicit-any-catch": "off"
+    }
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "**/test/**"
+    ]
+  }
+}
