@@ -1,4 +1,4 @@
-import { Greg } from "../src/index";
+import { Greg, Day } from "../src/index";
 
 describe("Greg tests", () => {
   let greg: Greg;
@@ -21,18 +21,24 @@ describe("Greg tests", () => {
   });
 
   it("should return all days for the correct weekday for the given month", () => {
-    const month = greg.toMonth()
+    const month = greg.toMonth();
 
     expect(month).toHaveLength(31);
     expect(month[0]).toBe(Greg.DAYS.WED);
     expect(month[4]).toBe(Greg.DAYS.SUN);
-  })
+  });
 
   it("should print a 6x7 array in calendar format", () => {
     const cal = greg.toCalendar();
 
     expect(cal).toHaveLength(6);
-    expect(cal[0]).toStrictEqual([null, null, null, 3, 4, 5, 6]);
+    expect(cal[0]).toStrictEqual([null, null, null, new Day(3, 1), new Day(4, 2), new Day(5, 3), new Day(6, 4)]);
     expect(cal[5]).toStrictEqual([null, null, null, null, null, null, null]);
+  });
+
+  it('.toCalendar should throw an error for invalid parameters', () => {
+    expect(() => {
+      greg.toCalendar(2);
+    }).toThrow();
   })
 });

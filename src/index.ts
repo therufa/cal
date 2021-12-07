@@ -10,7 +10,21 @@ const DAYS = {
 
 enum FirstDayOfWeek {
   SUN = DAYS.SUN,
-  MON = DAYS.MON
+  MON = DAYS.MON,
+}
+
+export class Day {
+  readonly weekDay: number;
+  readonly dayOfMonth: number;
+
+  constructor(weekDay: number, dayOfMonth: number) {
+    this.weekDay = weekDay;
+    this.dayOfMonth = dayOfMonth;
+  }
+
+  static toDay(weekDay: number, dayOfMonth: number) {
+    return new Day(weekDay, dayOfMonth);
+  }
 }
 
 export class Greg {
@@ -27,13 +41,15 @@ export class Greg {
   }
 
   get isLeapYear() {
-    return (this.year % 4 === 0 && this.year % 100 !== 0) || this.year % 400 === 0;
+    return (
+      (this.year % 4 === 0 && this.year % 100 !== 0) || this.year % 400 === 0
+    );
   }
 
   get daysInMonth() {
-    return (this.month === 2)
-      ? (28 + Number(this.isLeapYear))
-      : 31 - (this.month - 1) % 7 % 2;
+    return this.month === 2
+      ? 28 + Number(this.isLeapYear)
+      : 31 - (((this.month - 1) % 7) % 2);
   }
 
   /**
@@ -55,8 +71,8 @@ export class Greg {
       DAYS.THU,
       DAYS.SAT,
       DAYS.TUE,
-      DAYS.THU
-    ]
+      DAYS.THU,
+    ];
 
     const y = this.year - (this.month < 3 ? 1 : 0);
 
@@ -66,24 +82,30 @@ export class Greg {
   }
 
   toMonth() {
-    const monthArray = Array(this.daysInMonth).fill(0).map((_, day) => this.dow(day + 1))
+    const monthArray = Array(this.daysInMonth)
+      .fill(0)
+      .map((_, day) => this.dow(day + 1));
 
     return monthArray;
   }
 
   toCalendar(fdow: FirstDayOfWeek = DAYS.SUN) {
     if (Object.values(FirstDayOfWeek).includes(fdow) === false) {
-      throw new Error('Invalid first day of week');
+      throw new Error("Invalid first day of week");
     }
 
-    const month = this.toMonth();
-    const m = [
-      ...Array(7 - (1 + fdow) - month[0]).fill(null),
-      ...month,
-      ...Array(10).fill(null)
+    const daysOfMonth = this.toMonth();
+    const offset = 7 - (1 + fdow) - daysOfMonth[0];
+    const toDayOffset = (day: number, idx: number) => new Day(day, idx + 1);
+    const month = [
+      ...Array(offset).fill(null),
+      ...daysOfMonth.map(toDayOffset),
+      ...Array(10).fill(null), // placeholder
     ];
 
-    return Array(6).fill(0).map((_, row) => m.slice(row * 7, (row + 1) * 7));
+    return Array(6)
+      .fill(0)
+      .map((_, row) => month.slice(row * 7, (row + 1) * 7));
   }
 }
 
