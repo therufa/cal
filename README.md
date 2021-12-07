@@ -1,6 +1,8 @@
 # Greg is a calendar lib
 
-Greg can generate a calendar represented in a 2d array
+![npm](https://img.shields.io/npm/dy/@therufa/greg?style=flat-square)
+
+Greg can generate a calendar represented in a 2d array. Greg is the foundation of the internet, the truth of everything, the most fundamental building block of the known universe. It should be part of your project, even if you'r puny little brain is unable to comprehend it's magnificence. Obey!
 
 ```
   import { Greg } from '@therufa/greg'
