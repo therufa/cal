@@ -10,7 +10,7 @@
     "test": "npm run build && nyc jest",
     "build": "del-cli dist && tsc",
     "prepack": "npm run build",
-    "prerelease": "npx standard-version && npm pack"
+    "release": "npx standard-version && npm pack"
   },
   "files": [
     "dist/src"
