@@ -10,7 +10,7 @@
     "test": "npm run build && nyc jest",
     "build": "del-cli dist && tsc",
     "prepack": "npm run build",
-    "release": "npx standard-version && npm pack"
+    "release": "del-cli *.tgz && npx standard-version && npm pack && npm publish --access public *.tgz"
   },
   "files": [
     "dist/src"
@@ -22,7 +22,6 @@
   "keywords": [
     "calendar",
     "gregorian",
-    "julian",
     "month",
     "year",
     "day",
