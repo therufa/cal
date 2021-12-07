@@ -1,6 +1,6 @@
 {
   "name": "@therufa/greg",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Days of a month for any year in a 2D array",
   "main": "dist/src",
   "engines": {
